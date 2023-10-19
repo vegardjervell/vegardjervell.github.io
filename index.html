@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+<head>
+    <!-- Your head section -->
+    <style>
+        body {
+            background-color: #000; /* Set a background color for the body */
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            position: relative; /* Set the body as a positioning context for child elements */
+        }
+
+        #background-image {
+            position: scroll; /* Position the image element fixed */
+            top: 0;
+            left: 0;
+            width: 100%; /* Cover the full width of the viewport */
+            height: auto; /* Cover the full height of the viewport */
+            object-fit: cover; /* Maintain aspect ratio while covering */
+            z-index: 0; /* Position the image behind other content */
+        }
+
+        .block {
+            position: absolute;
+            padding: 0px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Add an image element with a specified ID -->
+    <img id="background-image" src="assets/graphics/background.png" alt="Background Image">
+
+    <div class="block" style="top: 5%;">
+        <h1 style="font-size: 5rem;">ThermoTools</h1>
+    </div>
+    <div class="block" style="top: 40%;">
+        <h1 style="font-size: 3rem;">ThermoPack</h1>
+    </div>
+    <div class="block" style="top: 70%;">
+        <h1 style="font-size: 3rem;">KineticGas</h1>
+    </div>
+    <!-- Your content here -->
+    <p>Your main content goes here.</p>
+</body>
+</html>

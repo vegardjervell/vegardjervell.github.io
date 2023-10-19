@@ -1,0 +1,12 @@
+title: ThermoPack
+description: A ThermoTools Project
+show_downloads: true
+plugins:
+- jekyll-feed
+- jekyll-include-cache
+
+url: 'https://thermotools.github.io'
+
+includes_dir: _includes
+
+pypi_url: 'https://pypi.org/project/thermopack/'
