@@ -2,6 +2,8 @@
 <html lang="{{ site.lang | default: "en-US" }}">
 <head>
     <!-- Your head section -->
+    <link href="https://fonts.googleapis.com/css?family=FontName" rel="stylesheet">
+
     <style>
         body {
             background-color: #000; /* Set a background color for the body */
@@ -9,6 +11,7 @@
             margin: 0;
             padding: 0;
             position: relative; /* Set the body as a positioning context for child elements */
+            font-family: 'FontName', sans-serif;
         }
 
         #background-image {
@@ -26,7 +29,58 @@
             padding: 0px;
             left: 50%;
             transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center horizontally */
             z-index: 2;
+            font-size: 1.5rem;
+        }
+
+        .block h1 {
+            text-align: center; /* Center the text horizontally */
+        }
+
+        .block a {
+            text-decoration: none; /* Remove underlines from links */
+            color: inherit; /* Inherit text color from the parent */
+        }
+
+        .block a:hover {
+            text-decoration: none; /* Add underline on hover */
+            color: #d3d3d3; /* Change color on hover */
+            cursor: pointer;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Adjust this value for spacing between buttons */
+        }
+
+        .button-container button {
+            font-size: 1.5rem; /* Adjust this value to make the text larger */
+            background-color: rgba(51, 51, 51, 0.3); /* Customize the button background color */
+            color: #fff; /* Customize the text color */
+            border: none; /* Remove the default button border */
+            padding: 10px 20px; /* Add padding to adjust button size */
+            cursor: pointer; /* Add pointer cursor for interactivity */
+            margin-right: 10px; /* Add margin between buttons */
+            margin-bottom: 10px;
+        }
+
+        .button-container button:hover {
+            color: #d3d3d3; /* Customize the text color */
+        }
+
+        .text-container {
+            background-color: rgba(51, 51, 51, 0.5); /* Add an opaque background */
+            padding: 5px; /* Add padding to create space between text and background */
+            border-radius: 5px; /* Add border radius for rounded corners */
+            margin-top: 0px; /* Add margin to separate it from the header */
+            margin-bottom: 10px;
+            display: flex; /* Use flex display */
+            justify-content: center; /* Horizontally center the content */
+            text-align: center;
         }
 
     </style>
@@ -35,16 +89,56 @@
     <!-- Add an image element with a specified ID -->
     <img id="background-image" src="assets/graphics/background.png" alt="Background Image">
 
-    <div class="block" style="top: 5%;">
-        <h1 style="font-size: 5rem;">ThermoTools</h1>
+    <div class="block" style="top: 12%;">
+        <h1 style="font-size: 5rem; margin-bottom: 3rem">ThermoTools</h1>
+        <div class="text-container">
+            ThermoTools is a project for open source development and distribution of codebases for thermodynamic and
+            transport modeling. Through ThermoTools we distribute the code we develop throughout our research, implementations
+            of both our own models and of models developed by others. The major code bases in ThermoTools are the
+            thermodynamic library ThermoPack and the gas-phase transport package KineticGas.
+        </div>
+        <div class="button-container">
+            <a href="#thermopack"> <button>ThermoPack</button> </a>
+            <a href="#kineticgas"> <button>KineticGas</button> </a>
+        </div>
+        <div class="button-container">
+            <a href="your-url-here"> <button>Contact</button> </a>
+            <a href="your-url-here"> <button>Contributing</button> </a>
+            <a href="https://github.com/thermotools"> <button>GitHub</button> </a>
+        </div>
     </div>
-    <div class="block" style="top: 40%;">
-        <h1 style="font-size: 3rem;">ThermoPack</h1>
+    <div class="block" style="top: 45%;">
+        <a href="https://thermotools.github.io/thermopack/">
+            <h1 style="font-size: 3rem;" id="thermopack"> ThermoPack</h1>
+        </a>
+        <div class="text-container">
+            ThermoPack is a thermodynamic library for mulitcomponent, multi-phase thermodynamics developed at SINTEF Energy
+            Research and NTNU Department of Chemistry. The Software implements a generic, user-friendly interface to a large
+            selection of equations of state. Most of these equations of state have been developed by other research groups
+            around the world, but some of them have been developed by us. Thermopack has for years been a much-appreciated
+            powerhouse, now forming the core of ThermoTools.
+        </div>
+        <div class="button-container">
+            <a href="https://thermotools.github.io/thermopack/"> <button>Home</button> </a>
+            <a href="https://github.com/thermotools/thermopack"> <button>GitHub</button> </a>
+            <a href="https://pypi.org/project/thermopack/"> <button>PyPI</button> </a>
+        </div>
     </div>
-    <div class="block" style="top: 70%;">
-        <h1 style="font-size: 3rem;">KineticGas</h1>
+    <div class="block" style="top: 75%;">
+        <a hrev="https://thermotools.github.io/KineticGas/">
+            <h1 style="font-size: 3rem;" id="kineticgas">KineticGas</h1>
+        </a>
+        <div class="text-container">
+            KineticGas is an implementation of Revised Enskog Theory (RET) for spherical potentials, the most notable of which
+            is RET-Mie, Revised Enskog Theory for Mie fluids, which can be used to reliably predict transport coefficients
+            such as viscosities, diffusion coefficients, thermal diffusion coefficients and thermal conductivities up to
+            the critical density for a variety of pure gases, mixtures and supercritical fluids.
+        </div>
+        <div class="button-container">
+            <a href="https://thermotools.github.io/KineticGas/"> <button>Home</button> </a>
+            <a href="https://github.com/thermotools/kineticgas"> <button>GitHub</button> </a>
+            <a href="https://pypi.org/project/pykingas/"> <button>PyPI</button> </a>
+        </div>
     </div>
-    <!-- Your content here -->
-    <p>Your main content goes here.</p>
 </body>
 </html>
