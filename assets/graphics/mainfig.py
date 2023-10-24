@@ -178,13 +178,6 @@ def tt_sides():
     grad3 = ColorGradient([(0, 1, 0.5), (0, 1, 1), (0.5, 0, 1)])
     tt_cmap_l = Colormap2D([grad1, grad2, grad3])
 
-    # for i in range(len(tlist) - 2):
-    #     for z in zlist:
-    #         plt.plot(tlist[i : i + 2] - 1, [z, z], color=tt_cmap_l(tlist[i], z), linewidth=5)
-    #         plt.plot(tlist[i : i + 2], [z, z], color=tt_cmap(tlist[i], z), linewidth=5)
-    # plt.show()
-    # exit(0)
-
     grad1 = ColorGradient([(1, 0, 0), (1, 0.6, 0), (1, 0.6, 0)][::-1])
     grad2 = ColorGradient([(1, 0, 1), (1, 1, 1), (1, 0, 0)][::-1])
     grad3 = ColorGradient([(1, 0, 0), (0.9, 1, 0), (0.985, 0.06, 0.75)][::-1])
@@ -212,8 +205,8 @@ def tt_sides():
 def w1(t):
     return 0.5 * (np.tanh(5 * (t - 0.3)) + 1)
 
-tlist = np.linspace(0, 1, 90) # 90
-zlist = np.linspace(0, 1, 50) # 50
+tlist = np.linspace(0, 1, 150) # 90
+zlist = np.linspace(0, 1, 200) # 50
 salpha = 0.1
 
 tt_f = lambda x, z: tt_f1(x, z) + tt_f2(x, z) + 1
@@ -230,10 +223,13 @@ plt.sca(ax)
 
 tp_plot()
 tp_sides()
+print('Thermopack finished')
 kg_plot()
 # kg_sides()
+print('Kineticgas finished')
 tt_plot()
 tt_sides()
+print('Thermotools finished')
 
 ax = plt.gca()
 ax.spines['top'].set_visible(False)
@@ -246,8 +242,8 @@ plt.gca().set_facecolor('black')
 
 plt.xlim(-4, 4)
 plt.ylim(-14, 5)
-plt.savefig('background.pdf')
+# plt.savefig('background.pdf')
 plt.savefig('background.png', dpi=96)
-plt.savefig('background.svg')
-plt.savefig('background.jpg', dpi=96)
+# plt.savefig('background.svg')
+# plt.savefig('background.jpg', dpi=96)
 plt.show()

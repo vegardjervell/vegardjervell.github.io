@@ -57,36 +57,96 @@ hlist = [h1, h2]
 def h(x, z):
     return [hi(x, z) for hi in hlist]
 
-if __name__ == '__main__':
-    xl = np.linspace(-3, 3, 100)
+def w1(t):
+    return 0.5 * (np.tanh(5 * (t - 0.3)) + 1)
 
-    plt.figure(figsize=(10, 5))
+def distrib(z):
+    return 4 - 8 * z
 
-    nz = 50
-    funclist = [h]# f, h, g]
-    alpha_func = lambda xi: max(np.tanh(abs(0.15 * xi)) - 0.1, 0.05)
+def ft(x, z, offset=0):
+    return distrib(z) + cos(10 * x - 5 * z) + offset
+
+def gt(x, z, offset=0):
+    return distrib(z) + 2 * sin(10 * x + 5 * z) + offset
+
+def ht(x, z, offset=0):
+    return distrib(z) + 5 * sin(15 * x * z) + offset
+
+def tt_plot():
+    xl = np.linspace(-3, 3, len(tlist) * 2)
+
+    funclist = [tt_f, tt_h, tt_g]
+    alpha_func = lambda xi: 0.15 * np.tanh(abs(0.95 * xi) - 3) + 0.16
     norm = lambda x: (x - min(xl)) / (max(xl) - min(xl))
-    zl = np.linspace(0, 1, nz)
+    zl = zlist
+    print(max([alpha_func(x) for x in xl]))
     for fi, func in enumerate(funclist):
         for z in zl:
             for i in range(len(xl) - 1):
                 alpha = alpha_func(xl[i])
-                funcvals = func(xl[i : i + 2], z)
-                for val in funcvals:
-                    plt.plot(xl[i : i + 2], val, color=cmap2d(norm(xl[i]), z)
-                         , alpha=alpha)
+                plt.plot(xl[i: i + 2], func(xl[i: i + 2], z), color=cmap2d(norm(xl[i]), z)
+                             , alpha=alpha, linewidth=linewidth)
+
+def tt_sides():
+    grad1 = ColorGradient([(0, 0.5, 1), (0, 1, 1), (0, 0, 1)])
+    grad2 = ColorGradient([(0, 1, 1), (0, 0.85, 0.95), (0, 1, 1)])
+    grad3 = ColorGradient([(0, 1, 0.5), (0, 1, 1), (0.5, 0, 1)])
+    tt_cmap_l = Colormap2D([grad1, grad2, grad3])
+
+    grad1 = ColorGradient([(1, 0, 0), (1, 0.6, 0), (1, 0.6, 0)][::-1])
+    grad2 = ColorGradient([(1, 0, 1), (1, 1, 1), (1, 0, 0)][::-1])
+    grad3 = ColorGradient([(1, 0, 0), (0.9, 1, 0), (0.985, 0.06, 0.75)][::-1])
+    tt_cmap_r = Colormap2D([grad1, grad2, grad3])
+
+    expand = 4
+
+    tt_funclist_l = [lambda x, z : tt_f(- 6 + 3 * x, z) * w1(x) + expand * ft(x, z) * (1 - w1(x)),
+                     lambda x, z : tt_h(- 6 + 3 * x, z) * w1(x) + expand * ht(x, z) * (1 - w1(x)),
+                     lambda x, z : tt_g(- 6 + 3 * x, z) * w1(x) + expand * gt(x, z) * (1 - w1(x))]
+
+    tt_funclist_r = [lambda x, z : tt_f(6 - 3 * x, z) * w1(x) + expand * ft(x, z) * (1 - w1(x)),
+                     lambda x, z : tt_h(6 - 3 * x, z) * w1(x) + expand * ht(x, z) * (1 - w1(x)),
+                     lambda x, z : tt_g(6 - 3 * x, z) * w1(x) + expand * gt(x, z) * (1 - w1(x))]
+
+    for fi, (func_l, func_r) in enumerate(zip(tt_funclist_l, tt_funclist_r)):
+        for z in zlist:
+            for i in range(len(tlist) - 1):
+                t = tlist[i: i + 2]
+                fval_l = func_l(t, z)
+                fval_r = func_r(t, z)
+                plt.plot(-6 + 3 * t, fval_l, color=tt_cmap_l(t[0], z), alpha=0.1376, linewidth=linewidth)
+                plt.plot(6 - 3 * t, fval_r, color=tt_cmap_r(t[0], z), alpha=0.1376, linewidth=linewidth)
+
+
+if __name__ == '__main__':
+    plt.figure(figsize=(10, 5))
+
+    linewidth = 2
+
+    tlist = np.linspace(0, 1, 150)
+    zlist = np.linspace(0, 1, 200)
+    salpha = 0.1
+
+    tt_f = lambda x, z: f1(x, z) + f2(x, z) + 1
+    tt_h = lambda x, z: h1(x, z) + h2(x, z)
+    tt_g = lambda x, z: g1(x, z) + g2(x, z) - 1
+
+    tt_plot()
+    print('Finished plot')
+    tt_sides()
+    print('Finished sides')
 
     ax = plt.gca()
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
-    ax.get_xaxis().set_ticks([])
-    ax.get_yaxis().set_ticks([])
+    # ax.get_xaxis().set_ticks([])
+    # ax.get_yaxis().set_ticks([])
     plt.gca().set_facecolor('black')
 
-    plt.xlim(min(xl), max(xl))
-    plt.ylim(-2, 3)
+    plt.xlim(-4, 4)
+    plt.ylim(-3.5, 5)
     # plt.savefig('toolfig.pdf')
-    # plt.savefig('toolfig.png', dpi=1200)
+    plt.savefig('toolfig.png', dpi=96)
     plt.show()
