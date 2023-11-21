@@ -1,65 +1,43 @@
 <!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
 <head>
-    <meta charset="UTF-8">
-
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#157878">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/page-header.css">
+    <!-- Your head section -->
+    <link href="https://fonts.googleapis.com/css?family=FontName" rel="stylesheet">
 
     <style>
         body {
+            background-color: #000; /* Set a background color for the body */
+            color: #fff;
             margin: 0;
             padding: 0;
+            position: relative; /* Set the body as a positioning context for child elements */
+            font-family: 'FontName', sans-serif;
         }
 
-        .main-content {
-            width: 100%;
-        }
-
-        .page-header {
-            width: 100%;
-            margin: 0;
-            padding: 20px; /* Add padding if needed */
-            background-color: #000; /* Set a background color if needed */
-            color: #fff; /* Set the text color to white or your preferred color */
-            text-align: center; /* Center the text horizontally */
-            background-image: url('/assets/graphics/toolfig.png');
-            background-position: center;
-            background-size: contain; /* You can adjust this property */
-            background-repeat: no-repeat;
-        }
-
-        .page-header .project-name {
-            color: #ffffff;
-        }
-        .page-header .project-tagline {
-            color: #ffffff;
+        #background-image {
+            position: scroll; /* Position the image element fixed */
+            top: 0;
+            left: 0;
+            width: 100%; /* Cover the full width of the viewport */
+            height: auto; /* Cover the full height of the viewport */
+            object-fit: cover; /* Maintain aspect ratio while covering */
+            z-index: 0; /* Position the image behind other content */
         }
 
         .block {
-            text-align: center;
-            color: #fff; /* Set text color */
-            text-decoration: none; /* Remove underlines from links */
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;
-            width: 100%; /* Set width to 100% */
-            margin-top: 5%;
-            padding-bottom: 00%;
+            position: absolute;
+            padding: 0px;
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-radius: 15px;
+            justify-content: center; /* Center horizontally */
+            z-index: 2;
+            font-size: 1.5rem;
         }
 
         .block h1 {
             text-align: center; /* Center the text horizontally */
-            color: #fff
         }
 
         .block a {
@@ -71,14 +49,6 @@
             text-decoration: none; /* Add underline on hover */
             color: #d3d3d3; /* Change color on hover */
             cursor: pointer;
-        }
-
-        #block1 {
-            background-image: url('/assets/graphics/thermopack.png');
-        }
-
-        #block2 {
-            background-image: url('/assets/graphics/kingas.png'); /* Specify the path to your image */
         }
 
         .button-container {
@@ -112,53 +82,63 @@
             justify-content: center; /* Horizontally center the content */
             text-align: center;
         }
+
     </style>
 </head>
 <body>
+    <!-- Add an image element with a specified ID -->
+    <img id="background-image" src="assets/graphics/background.png" alt="Background Image">
 
-<header class="page-header" role="banner">
-    <h1 class="project-name">ThermoTools</h1>
-    <h2 class="project-tagline">Free, Open Source Thermodynamic and Transport property Software</h2>
-</header>
-
-<main id="content" class="main-content" role="main">
-
-    <div class="block" id="block1">
+    <div class="block" style="top: 12%;">
+        <h1 style="font-size: 5rem; margin-bottom: 3rem">ThermoTools</h1>
+        <div class="text-container">
+            ThermoTools is a project for open source development and distribution of codebases for thermodynamic and
+            transport modeling. Through ThermoTools we distribute the code we develop throughout our research, implementations
+            of both our own models and of models developed by others. The major code bases in ThermoTools are the
+            thermodynamic library ThermoPack and the gas-phase transport package KineticGas.
+        </div>
+        <div class="button-container">
+            <a href="#thermopack"> <button>ThermoPack</button> </a>
+            <a href="#kineticgas"> <button>KineticGas</button> </a>
+        </div>
+        <div class="button-container">
+            <a href="your-url-here"> <button>Contact</button> </a>
+            <a href="your-url-here"> <button>Contributing</button> </a>
+            <a href="https://github.com/thermotools"> <button>GitHub</button> </a>
+        </div>
+    </div>
+    <div class="block" style="top: 45%;">
         <a href="https://thermotools.github.io/thermopack/">
             <h1 style="font-size: 3rem;" id="thermopack"> ThermoPack</h1>
         </a>
-        <!-- <div class="text-container">
+        <div class="text-container">
             ThermoPack is a thermodynamic library for mulitcomponent, multi-phase thermodynamics developed at SINTEF Energy
             Research and NTNU Department of Chemistry. The Software implements a generic, user-friendly interface to a large
             selection of equations of state. Most of these equations of state have been developed by other research groups
             around the world, but some of them have been developed by us. Thermopack has for years been a much-appreciated
             powerhouse, now forming the core of ThermoTools.
-        </div> -->
+        </div>
         <div class="button-container">
             <a href="https://thermotools.github.io/thermopack/"> <button>Home</button> </a>
             <a href="https://github.com/thermotools/thermopack"> <button>GitHub</button> </a>
             <a href="https://pypi.org/project/thermopack/"> <button>PyPI</button> </a>
         </div>
     </div>
-
-    <div class="block" id="block2">
+    <div class="block" style="top: 75%;">
         <a href="https://thermotools.github.io/KineticGas/">
             <h1 style="font-size: 3rem;" id="kineticgas">KineticGas</h1>
         </a>
-        <!--- <div class="text-container">
+        <div class="text-container">
             KineticGas is an implementation of Revised Enskog Theory (RET) for spherical potentials, the most notable of which
             is RET-Mie, Revised Enskog Theory for Mie fluids, which can be used to reliably predict transport coefficients
             such as viscosities, diffusion coefficients, thermal diffusion coefficients and thermal conductivities up to
             the critical density for a variety of pure gases, mixtures and supercritical fluids.
-        </div> --->
+        </div>
         <div class="button-container">
             <a href="https://thermotools.github.io/KineticGas/"> <button>Home</button> </a>
             <a href="https://github.com/thermotools/kineticgas"> <button>GitHub</button> </a>
             <a href="https://pypi.org/project/pykingas/"> <button>PyPI</button> </a>
         </div>
     </div>
-
-</main>
-
 </body>
 </html>

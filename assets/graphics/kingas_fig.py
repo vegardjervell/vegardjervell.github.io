@@ -80,12 +80,15 @@ def k(x, z):
     return sum(ki(x, z) for ki in klist) * mod(x)
 
 if __name__ == '__main__':
+    fig = plt.figure(figsize=(10, 5))
+    ax = plt.Axes(fig, [0, 0, 1, 1])
+    fig.add_axes(ax)
+    plt.sca(ax)
+
     xl = np.linspace(-3, 3, 50)
 
     def norm(x):
         return (x + 3) / 6
-
-    plt.figure(figsize=(10, 5))
 
     nz = [50 for _ in range(4)]
     funclist = [h, g, f, k]
@@ -104,7 +107,7 @@ if __name__ == '__main__':
             for xli in range(1, len(xlims)):
                 for i in range(xlims[xli - 1], xlims[xli]):
                     plt.plot(xl[i : i + 2], func(xl[i : i + 2], z), color=cmap2d(norm(xl[i]) + color_xshifts[fi], z)
-                             , alpha=alpha_list[xli - 1][fi] * min(1, abs(xl[i])**2 + 0.05))
+                             , alpha=alpha_list[xli - 1][fi] * min(1, abs(xl[i])**2 + 0.15))
 
     # NOTE: Because I couldn't figure out how to completely remove the green background from the header, the background
     #       figure needs to have white backing (not be transparent). Someone that knows more CSS than me can probably
@@ -116,9 +119,9 @@ if __name__ == '__main__':
     ax.spines['left'].set_visible(False)
     ax.get_xaxis().set_ticks([])
     ax.get_yaxis().set_ticks([])
-    plt.gca().set_facecolor('white')
+    plt.gca().set_facecolor('black')
 
     plt.xlim(min(xl), max(xl))
-    plt.ylim(-1, 4)
-    plt.savefig('header.pdf', bbox_inches='tight', pad_inches=0)
+    plt.ylim(-1.5, 4)
+    plt.savefig('kingas.png', dpi=96)
     plt.show()

@@ -59,7 +59,10 @@ def h(x, z):
 if __name__ == '__main__':
     xl = np.linspace(-3, 3, 200)
 
-    plt.figure(figsize=(10, 5))
+    fig = plt.figure(figsize=(10, 5))
+    ax = plt.Axes(fig, [0, 0, 1, 1])
+    fig.add_axes(ax)
+    plt.sca(ax)
 
     xlims1 = lambda z : int(len(xl) * z / 3) + int(len(xl) / 6)
     xlims2 = lambda z : int(len(xl) * z * 2 / 3)
@@ -73,10 +76,9 @@ if __name__ == '__main__':
             for i in range(xlims1(z)):
                 plt.plot(xl[i : i + 2], func(xl[i : i + 2], z), color=cmap2d((xl[i] / max(xl)) / color_xshift[fi], z)
                          , alpha=alpha_list[fi])
-    nz = [200, 100, 200]
+    nz = [nz[2], nz[0], nz[1]]
     funclist = [h, f, g]
     color_xshift = [1, 0.8, 0.6]
-    alpha_list = [0.05, 0.05, 0.05]
     for fi, func in enumerate(funclist):
         zl = np.linspace(0, 1, nz[fi])
         for z in zl:
@@ -84,10 +86,9 @@ if __name__ == '__main__':
                 plt.plot(xl[i : i + 2], func(xl[i : i + 2], z), color=cmap2d((xl[i] / max(xl)) / color_xshift[fi], z)
                          , alpha=alpha_list[fi])
 
-    nz = [200, 200, 100]
+    nz = [nz[2], nz[0], nz[1]]
     funclist = [h, g, f]
     color_xshift = [1, 0.6, 0.8]
-    alpha_list = [0.05, 0.05, 0.05]
     for fi, func in enumerate(funclist):
         zl = np.linspace(0, 1, nz[fi])
         for z in zl:
@@ -105,9 +106,9 @@ if __name__ == '__main__':
     ax.spines['left'].set_visible(False)
     ax.get_xaxis().set_ticks([])
     ax.get_yaxis().set_ticks([])
-    plt.gca().set_facecolor('white')
+    plt.gca().set_facecolor('black')
 
     plt.xlim(min(xl), max(xl))
-    plt.ylim(-2, 3)
-    plt.savefig('header.pdf', bbox_inches='tight', pad_inches=0)
+    plt.ylim(-3, 4)
+    plt.savefig('thermopack.png', dpi=96)
     plt.show()

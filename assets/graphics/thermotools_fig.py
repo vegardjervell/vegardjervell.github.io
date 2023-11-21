@@ -19,9 +19,9 @@ from tools import ColorGradient, Colormap2D
 
 norm_rgb = lambda r, g, b : tuple(x / 255 for x in (r, g, b))
 
-grad1 = ColorGradient([(0, 0, 1)  , (1, 0.5, 1), (1, 1, 1), (1, 1, 0), (1, 0, 0)])
-grad2 = ColorGradient([(0, 1, 1)  , (0, 1, 0.5), (1, 1, 1), (0.985, 0.06, 0.75), (1, 0, 1)])
-grad3 = ColorGradient([(0.5, 0, 1), (0, 0, 1), (1, 1, 1), (0.5, 0, 1), (1, 0, 0)])
+grad1 = ColorGradient([(0, 0, 1)  , (1, 0.5, 1), (1, 1, 0.85), (1, 1, 0), (1, 0, 0)])
+grad2 = ColorGradient([(0, 1, 1)  , (0, 1, 0.5), (0.85, 1, 0.85), (0.985, 0.06, 0.75), (1, 0, 1)])
+grad3 = ColorGradient([(0.5, 0, 1), (0, 0, 1), (0.85, 0.85, 1), (0.5, 0, 1), (1, 0, 0)])
 
 cmap2d = Colormap2D([grad1, grad2, grad3])
 # cmap2d.display()
@@ -119,7 +119,10 @@ def tt_sides():
 
 
 if __name__ == '__main__':
-    plt.figure(figsize=(10, 5))
+    fig = plt.figure(figsize=(40, 5))
+    ax = plt.Axes(fig, [0, 0, 1, 1])
+    fig.add_axes(ax)
+    plt.sca(ax)
 
     linewidth = 2
 
@@ -141,9 +144,9 @@ if __name__ == '__main__':
     ax.spines['right'].set_visible(False)
     ax.spines['bottom'].set_visible(False)
     ax.spines['left'].set_visible(False)
-    # ax.get_xaxis().set_ticks([])
-    # ax.get_yaxis().set_ticks([])
-    plt.gca().set_facecolor('black')
+    ax.get_xaxis().set_ticks([])
+    ax.get_yaxis().set_ticks([])
+    plt.gca().set_facecolor('0.1')
 
     plt.xlim(-4, 4)
     plt.ylim(-3.5, 5)
