@@ -24,7 +24,7 @@
             width: 100%;
             margin: 0;
             padding: 20px; /* Add padding if needed */
-            background-color: #000; /* Set a background color if needed */
+            background-color: #1A1A1A; /* Set a background color if needed */
             color: #fff; /* Set the text color to white or your preferred color */
             text-align: center; /* Center the text horizontally */
             background-image: url('/assets/graphics/toolfig.png');
@@ -49,7 +49,7 @@
             background-position: center;
             width: 100%; /* Set width to 100% */
             margin-top: 5%;
-            padding-bottom: 00%;
+            padding-bottom: 0%;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -59,16 +59,18 @@
 
         .block h1 {
             text-align: center; /* Center the text horizontally */
-            color: #fff
+            color: #fff;
+            z-index: 2;
         }
 
         .block a {
             text-decoration: none; /* Remove underlines from links */
             color: inherit; /* Inherit text color from the parent */
+            z-index: 2;
         }
 
         .block a:hover {
-            text-decoration: none; /* Add underline on hover */
+            /* text-decoration: none; Add underline on hover */
             color: #d3d3d3; /* Change color on hover */
             cursor: pointer;
         }
@@ -81,20 +83,52 @@
             background-image: url('/assets/graphics/kingas.png'); /* Specify the path to your image */
         }
 
+        .block-description {
+            display: none; /* Hidden by default */
+        }
+
+        .block.expanded .block-description{
+            display: block;
+            z-index: 2;
+        }
+
+        .block.expanded {
+            position: relative; /* Set position to relative for absolute positioning of the overlay */
+        }
+
+        .block .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent grey background */
+            display: none; /* Hide the overlay by default */
+            z-index: 0; /* Place the overlay above other content */
+            border-radius: 15px;
+        }
+
+        .block.expanded .overlay {
+            display: block; /* Show the overlay when the block is expanded */
+        }
+
         .button-container {
             display: flex;
             justify-content: center;
+            align-items: center;
+            position: relative;
             gap: 10px; /* Adjust this value for spacing between buttons */
+            z-index: 2;
         }
 
         .button-container button {
             font-size: 1.5rem; /* Adjust this value to make the text larger */
-            background-color: rgba(51, 51, 51, 0.3); /* Customize the button background color */
+            background-color: rgba(51, 51, 51, 0.0); /* Customize the button background color */
             color: #fff; /* Customize the text color */
             border: none; /* Remove the default button border */
             padding: 10px 20px; /* Add padding to adjust button size */
             cursor: pointer; /* Add pointer cursor for interactivity */
-            margin-right: 10px; /* Add margin between buttons */
+            /* margin-right: 10px; Add margin between buttons */
             margin-bottom: 10px;
         }
 
@@ -113,6 +147,13 @@
             text-align: center;
         }
     </style>
+    <script>
+        // JavaScript to toggle the expanded class on button click
+        function toggleBlock(blockId) {
+            const block = document.getElementById(blockId);
+            block.classList.toggle('expanded');
+        }
+    </script>
 </head>
 <body>
 
@@ -122,18 +163,19 @@
 </header>
 
 <main id="content" class="main-content" role="main">
-
     <div class="block" id="block1">
+        <div class="overlay"></div>
         <a href="https://thermotools.github.io/thermopack/">
             <h1 style="font-size: 3rem;" id="thermopack"> ThermoPack</h1>
         </a>
-        <!-- <div class="text-container">
+        <div class="button-container"><button onclick="toggleBlock('block1')">About</button> </div>
+        <div class="block-description">
             ThermoPack is a thermodynamic library for mulitcomponent, multi-phase thermodynamics developed at SINTEF Energy
             Research and NTNU Department of Chemistry. The Software implements a generic, user-friendly interface to a large
             selection of equations of state. Most of these equations of state have been developed by other research groups
             around the world, but some of them have been developed by us. Thermopack has for years been a much-appreciated
             powerhouse, now forming the core of ThermoTools.
-        </div> -->
+        </div>
         <div class="button-container">
             <a href="https://thermotools.github.io/thermopack/"> <button>Home</button> </a>
             <a href="https://github.com/thermotools/thermopack"> <button>GitHub</button> </a>
@@ -142,15 +184,17 @@
     </div>
 
     <div class="block" id="block2">
+        <div class="overlay"></div>
         <a href="https://thermotools.github.io/KineticGas/">
             <h1 style="font-size: 3rem;" id="kineticgas">KineticGas</h1>
         </a>
-        <!--- <div class="text-container">
+        <div class="button-container"><button onclick="toggleBlock('block2')">About</button></div>
+        <div class="block-description">
             KineticGas is an implementation of Revised Enskog Theory (RET) for spherical potentials, the most notable of which
             is RET-Mie, Revised Enskog Theory for Mie fluids, which can be used to reliably predict transport coefficients
             such as viscosities, diffusion coefficients, thermal diffusion coefficients and thermal conductivities up to
             the critical density for a variety of pure gases, mixtures and supercritical fluids.
-        </div> --->
+        </div>
         <div class="button-container">
             <a href="https://thermotools.github.io/KineticGas/"> <button>Home</button> </a>
             <a href="https://github.com/thermotools/kineticgas"> <button>GitHub</button> </a>
